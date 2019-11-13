@@ -1,0 +1,8 @@
+{
+  "problems": [
+    { "problem": "3*2+13", "answer": 19 },
+    { "problem": "(27-8)*3", "answer": 57 },
+    { "problem": "39+42-13", "answer": 68 },
+    { "problem": "13+(38*2)", "answer": 68 }
+  ]
+}

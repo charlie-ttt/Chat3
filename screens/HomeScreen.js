@@ -3,37 +3,45 @@ import { View, Platform, KeyboardAvoidingView } from 'react-native';
 import io from 'socket.io-client';
 
 import JoinScreen from './JoinScreen';
-import ChatScreen from './ChatScreen';
+import MainGame from './MainGame';
 
 export default function HomeScreen() {
   // const [recvMessages, setRecvMessages] = useState([]);
   const [score1, setScore1] = useState(0);
   const [score2, setScore2] = useState(0);
+  const [score, setScore] = useState([0, 0, 0, 0, 1, 0, 0, 0, 0]);
 
   const [hasJoined, setHasJoined] = useState(false);
   const socket = useRef(null);
 
   useEffect(() => {
-    socket.current = io('http://192.168.0.5:3001');
+    socket.current = io('http://172.17.23.185:3001');
     socket.current.on('messageback', user => {
-      console.log('user', user);
-      console.log('user', +user.userId);
+      console.log('in socket emitback, her is score', score);
+      console.log('in socket emitback, her is score2', score2);
 
       console.log('they scoring');
       setScore2(prev => prev + 1);
-      // }
-      // setRecvMessages(prevState => GiftedChat.append(prevState, message));
+      setScore(arrLeft(score));
     });
   }, []);
-
-  // const onSend = messages => {
-  //   socket.current.emit('message', messages[0].text);
-  //   setRecvMessages(prevState => GiftedChat.append(prevState, messages));
-  // };
 
   const joinChat = username => {
     socket.current.emit('join', username);
     setHasJoined(true);
+  };
+
+  const arrRight = arr => {
+    const newState = arr;
+    newState.unshift(0);
+    newState.pop();
+    return newState;
+  };
+  const arrLeft = arr => {
+    const newState = arr;
+    newState.push(0);
+    newState.shift();
+    return newState;
   };
 
   const incPoint = id => {
@@ -42,22 +50,17 @@ export default function HomeScreen() {
 
     console.log('we scored!');
     setScore1(prev => prev + 1);
-    socket.current.emit('message', 'hello');
+    setScore(prev => prev + 1);
+    setScore(arrRight(score));
+    socket.current.emit('message', 'nothing');
   };
 
   return (
     <View style={{ flex: 1 }}>
       {hasJoined ? (
-        // <GiftedChat
-        //   renderUsernameOnMessage
-        //   messages={recvMessages}
-        //   onSend={messages => onSend(messages)}
-        // user={{
-        //   _id: 1
-        // }}
-        // />
-        <ChatScreen
+        <MainGame
           incPoint={incPoint}
+          score={score}
           score1={score1}
           score2={score2}
           user={{
