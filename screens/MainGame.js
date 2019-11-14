@@ -7,15 +7,13 @@ export default function MainGame(props) {
   return (
     <View style={styles.outer_container}>
       <View style={styles.inner_container}>
-        <Text>Here is ChatGame</Text>
-        {/* {console.log("GAME SCORE", props.score)} */}
         <Text>Your Score: {props.score1}</Text>
         <Text>Opponent Score: {props.score2}</Text>
-        <Text>id {props.user.id}</Text>
+        <Text>Your Team is {props.user.id}</Text>
         <Button title="+ point" onPress={() => props.incPoint(1)} />
       </View>
       <View style={styles.inner_container}>
-        <GameScore score={props.score} />
+        <GameScore score1={props.score1} score2={props.score2} />
       </View>
       <View style={styles.inner_container}>
         <GameProblems score={props.score} incPoint={props.incPoint} />

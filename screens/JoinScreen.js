@@ -8,14 +8,14 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
-export default function JoinScreen({ joinChat }) {
+export default function JoinScreen({ joinGame }) {
   const [username, setUsername] = useState('');
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Image
         resizeMode="contain"
         style={{ flex: 1 }}
-        source={require('../assets/chat-icon.png')}
+        source={require('../assets/doggo.png')}
       />
       <View style={{ flex: 1, justifyContent: 'space-around' }}>
         <TextInput
@@ -24,7 +24,7 @@ export default function JoinScreen({ joinChat }) {
           style={{ fontSize: 25, textAlign: 'center' }}
           placeholder="Enter username: "
         />
-        <Button title="Join Chat" onPress={() => joinChat(username)} />
+        <Button title="Join the Game" onPress={() => joinGame(username)} />
       </View>
       {Platform.OS === 'ios' && <KeyboardAvoidingView behavior="padding" />}
     </View>

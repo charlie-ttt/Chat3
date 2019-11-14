@@ -43,6 +43,9 @@ export default function GameProblems(props) {
           value={currentUserAnswer}
           onChangeText={text => setCurrentUserAnswer(text)}
           placeholder="Answer here "
+          keyboardType="numbers-and-punctuation"
+          returnKeyType="send"
+          onSubmitEditing={() => checkAnswer(currentUserAnswer)}
         />
       </View>
       <View style={styles.inner_container}>
